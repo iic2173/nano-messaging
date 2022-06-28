@@ -7,7 +7,7 @@ services:
     env_file: 
       - ./.env_db
     ports:
-      - "5432:5432"
+      - "5433:5433"
   api:
     build:
       context: api
@@ -18,7 +18,7 @@ services:
       - /usr/src/api/node_modules
       - ./api/:/usr/src/api
     ports:
-      - "7777:7777"
+      - "80:7777"
       - "9229:9229"
     command:
       "npm run debug"

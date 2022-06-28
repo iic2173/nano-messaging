@@ -2,6 +2,7 @@
 
 const mainApp = require('./src/app');
 const db = require('./src/models');
+const newRelic = require('newrelic');
 
 require('dotenv').config();
 

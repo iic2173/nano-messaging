@@ -61,7 +61,7 @@ Este token tiene la siguiente composición
 {
     "aud":"chat.nano-messaging.net",
     "iss":"api.nano-messaging.net",
-    "exp":"999999999999",
+    "exp":999999999999,
     "sub":"xxxxxx-xxxxx...."
     "entityUUID":"xxxxxx-xxxxx....",
     "userUUID":"xxxxxx-xxxxx....",
@@ -104,7 +104,7 @@ Posteriormente puede invitar mas miembros añadiendolos mediante una regla en la
 }
 ```
 
-`entity_UUID` se refiere al UUID al que se quiere autorizar. `permissions` es un string definiendo permisos (use `rw`)
+`entity_UUID` se refiere al UUID del usuario al que se quiere autorizar. `permissions` es un string definiendo permisos (use `rw`)
 
 ```
  * r = read
@@ -145,7 +145,7 @@ Al seleccionar un room correcto, recibirá todos los mensajes dirigidos a ese ro
 ```json=
 {
     "type":"message",
-    "msg":"Fueled up and ready to go"
+    "content":"Fueled up and ready to go"
 }
 ```
 

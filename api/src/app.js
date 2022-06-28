@@ -1,6 +1,7 @@
 // const env = require('dotenv').config();
 const path = require('path');
 const Koa = require('koa');
+const cors = require('koa2-cors');
 const koaBody = require('koa-body');
 const koaLogger = require('koa-logger');
 const koajwt = require('koa-jwt');
@@ -22,6 +23,11 @@ const websockify = require('koa-websocket');
 const orm = require('./models');
 
 const app = websockify(new Koa());
+
+var options = {
+  origin: '*'
+};
+app.use(cors(options));
 
 const developmentMode = app.env === 'development';
 const testMode = app.env === 'test';
@@ -71,8 +77,8 @@ app.use(koajwt({
   secret: process.env.JWT_MASTER_SECRET,
   key: 'tokendata',
   // passthrough: true,
-  audience: process.env.AUDIENCE,
-  issuer: process.env.ISSUER,
+  //audience: process.env.AUDIENCE,
+  //issuer: process.env.ISSUER,
 }));
 
 // parse request body
@@ -212,9 +218,27 @@ wsrouter.all('/chat', async (ctx) => {
       if (roomIDTarget === 0) {
         ctx.websocket.send('{"type":"status","data":"NOTAUTHORIZED"');
       } else {
-        ctx.websocket.send('{"type":"status","data":"CONNECTED"');
+        ctx.websocket.send('{"type":"status","data":"CONNECTED"}');
         redisClientSub.unsubscribe('*'); // Test this
         redisClientSub.subscribe(`room-${roomIDTarget}`);
+      }
+    } else if (command.type === 'get_past_messages') {
+      if (roomIDTarget > 0) {
+        let messages = await ctx.orm.Message.findAll({
+          where: {
+            room_id: roomIDTarget,
+          },
+          order: [['createdAt', 'ASC']],
+        });
+        messages.forEach((message) => {
+          const response = {
+            type: 'message',
+            data: message,
+          };
+          ctx.websocket.send(JSON.stringify(response));
+        });
+      } else {
+        ctx.websocket.send('{"type":"query","data":"SELECTROOM?"}');
       }
     } else if (command.type === 'message') {
       if (roomIDTarget > 0) {

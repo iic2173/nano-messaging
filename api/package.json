@@ -21,17 +21,19 @@
     "koa-compress": "^5.0.1",
     "koa-graphql": "^0.8.0",
     "koa-helmet": "^6.1.0",
+    "koa-joi-router": "^8.0.0",
     "koa-json": "^2.0.2",
     "koa-jwt": "^4.0.1",
     "koa-logger": "^3.2.1",
     "koa-mount": "^4.0.0",
     "koa-override-method": "^1.0.0",
     "koa-router": "^10.0.0",
-    "koa-joi-router": "^8.0.0",
     "koa-static": "^5.0.0",
     "koa-static-cache": "^5.1.4",
     "koa-websocket": "^6.0.0",
     "lodash": "^4.17.21",
+    "moment": "^2.29.1",
+    "newrelic": "^8.14.1",
     "node-redis-connection-pool": "^3.1.0",
     "nodemon": "^2.0.16",
     "pg": "^8.6.0",
@@ -41,8 +43,7 @@
     "sequelize": "^6.6.2",
     "sequelize-cli": "^6.2.0",
     "sequelize-typescript": "^2.1.0",
-    "ws": "^7.4.6",
-    "moment": "^2.29.1"
+    "ws": "^7.4.6"
   },
   "devDependencies": {
     "@types/koa": "^2.13.1",
@@ -64,6 +65,8 @@
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.23.4",
     "jest": "^27.0.1",
+    "koa-cors": "^0.0.16",
+    "koa2-cors": "^2.0.6",
     "prettier": "^2.3.0"
   }
 }
